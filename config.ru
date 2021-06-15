@@ -5,6 +5,8 @@ if ActiveRecord::Base.connection.migration_context.needs_migration?
 end
 
 use Rack::MethodOverride
-use TweetsController
+use GearController
+use LocationController
+use FishController
 use UsersController
 run ApplicationController
