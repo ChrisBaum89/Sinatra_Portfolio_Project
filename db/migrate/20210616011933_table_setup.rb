@@ -29,5 +29,4 @@ class TableSetup < ActiveRecord::Migration[6.0]
       t.integer :location_id
     end
   end
-
 end
