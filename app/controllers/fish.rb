@@ -1,3 +1,3 @@
-class Fish < ActiveRecord::Base
-  belongs_to :catches
+class Fish < ApplicationController
+  
 end

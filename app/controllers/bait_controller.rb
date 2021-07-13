@@ -1,3 +1,3 @@
-class BaitController < ActiveRecord::Base
-  belongs_to :users
+class BaitController < ApplicationController
+
 end

@@ -1,3 +1,3 @@
-class CatchController < ActiveRecord::Base
-  belongs_to :baits
+class CatchController < ApplicationController
+  
 end
