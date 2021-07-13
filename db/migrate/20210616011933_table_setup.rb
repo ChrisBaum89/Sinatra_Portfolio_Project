@@ -10,23 +10,24 @@ class TableSetup < ActiveRecord::Migration[6.0]
   def change
     create_table :fishes do |t|
       t.string :type
-      t.string :length
       t.integer :weight
+      t.integer :length
+      t.integer :catch_id
     end
   end
 
   def change
-    create_table :locations do |t|
-      t.string :type #river, lake, etc.
-      t.string :name
+    create_table :baits do |t|
+      t.string :type
+      t.string :color
+      t.string :user_id
     end
   end
 
   def change
     create_table :catches do |t|
-      t.integer :user_id
-      t.integer :fish_id
-      t.integer :location_id
+      t.datetime :create_time
+      t.integer :bait_id
     end
   end
 end
