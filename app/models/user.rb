@@ -1,5 +1,5 @@
 class User < ActiveRecord::Base
-  has_many :catches
-  has_many :fishes, through: :catches
-  has_many :locations, through: :catches
+  has_many :baits
+  has_many :catches, through: :baits
+  has_many :fish, through: :catches
 end
