@@ -4,6 +4,7 @@ class CatchController < ApplicationController
   end
 
   get "/catch/new" do
+      @baits = Bait.all
       erb :"catch/new"
   end
 
