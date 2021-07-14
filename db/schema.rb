@@ -10,10 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_07_14_003421) do
+ActiveRecord::Schema.define(version: 2021_07_14_014853) do
 
   create_table "baits", force: :cascade do |t|
-    t.string "type"
+    t.string "name"
     t.string "color"
     t.string "user_id"
   end

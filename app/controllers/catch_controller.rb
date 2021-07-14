@@ -1,17 +1,17 @@
 class CatchController < ApplicationController
-  get "/catch" do
-    erb :"catch/index"
+  get "/catches" do
+    erb :"catches/index"
   end
 
-  get "/catch/new" do
+  get "/catches/new" do
       @baits = Bait.all
-      erb :"catch/new"
+      erb :"catches/new"
   end
 
-  get "/catch/:id" do
+  get "/catches/:id" do
       @catch = Catch.find_by_id(params[:id])
       @catch_creator = User.find_by_id(@catch.user_id)
-      erb :"catch/show"
+      erb :"catches/show"
   end
 
 end

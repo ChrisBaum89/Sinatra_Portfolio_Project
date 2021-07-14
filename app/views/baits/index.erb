@@ -1,2 +1,5 @@
-bait index page
-this page will show all baits that the user owns
+<h1>Your Baits</h1>
+<%@baits.each do |bait|%>
+  <h4><%=bait.name%>, <%=bait.color%></h4>
+  <h4>Fish caught: </h4><br>
+<%end%>

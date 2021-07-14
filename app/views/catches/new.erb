@@ -3,23 +3,26 @@
 <form action="/catches" method="post">
 
   <!--Existing Bait-->
+  <h2>Your Existing Baits</h2>
   <% @baits.each do |bait| %>
-    <label><%=bait.type%></label>
-    <input type="checkbox" id="bait_<%=bait.id%>" name="catch[bait_ids][]" value="<%=bait.id%>">
-  <% end %>
+    <label><%=bait.name%></label>
+    <input type="checkbox" id="bait_<%=bait.id%>" value="<%=bait.id%>"><br>
+  <% end %><br>
 
   <!--New Bait-->
+  <h2>New Bait</h2>
   <label for="bait_type">Bait Type: </label>
   <input type="text" name="bait_type"><br><br>
   <label for="bait_color">Bait Color: </label>
   <input type="text" name="bait_color"><br><br>
 
   <!--New Fish-->
-  <label for="fish_type">Fish Type: </label>
-  <input type="text" name="fish_type"><br><br>
-  <label for="fish_weight">Fish Weight: </label>
+  <h2>Fish Information</h2>
+  <label for="fish_species">Species: </label>
+  <input type="text" name="fish_species"><br><br>
+  <label for="fish_weight">Weight: </label>
   <input type="text" name="fish_weight"><br><br>
-  <label for="fish_length">Fish Length: </label>
+  <label for="fish_length">Length: </label>
   <input type="fish_length" name=""><br><br>
 
   <!--submit-->
