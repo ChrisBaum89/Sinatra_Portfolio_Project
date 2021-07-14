@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_07_14_014853) do
+ActiveRecord::Schema.define(version: 2021_07_14_021813) do
 
   create_table "baits", force: :cascade do |t|
     t.string "name"
@@ -24,7 +24,7 @@ ActiveRecord::Schema.define(version: 2021_07_14_014853) do
   end
 
   create_table "fishes", force: :cascade do |t|
-    t.string "type"
+    t.string "species"
     t.integer "weight"
     t.integer "length"
     t.integer "catch_id"
