@@ -7,4 +7,10 @@ class CatchController < ApplicationController
       erb :"catch/new"
   end
 
+  get "/catch/:id" do
+      @catch = Catch.find_by_id(params[:id])
+      @catch_creator = User.find_by_id(@catch.user_id)
+      erb :"catch/show"
+  end
+
 end
