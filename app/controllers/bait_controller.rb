@@ -1,16 +1,20 @@
 class BaitController < ApplicationController
 
-  get "/bait" do
-    erb :"bait/index"
+  get "/baits" do
+    erb :"baits/index"
   end
 
-  get "/bait/new" do
-      erb :"bait/new"
+  get "/baits/new" do
+      erb :"baits/new"
   end
 
-  get "/bait/:id" do
+  get "/baits/:id" do
       @bait = Bait.find_by_id(params[:id])
       @bait_creator = User.find_by_id(@bait.user_id)
-      erb :"bait/show"
+      erb :"baits/show"
+  end
+
+  post '/baits' do
+    binding.pry
   end
 end
