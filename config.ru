@@ -6,7 +6,7 @@ end
 
 use Rack::MethodOverride
 use CatchController
-use LocationController
+use BaitController
 use FishController
 use UserController
 run ApplicationController
