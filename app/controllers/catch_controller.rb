@@ -1,5 +1,6 @@
 class CatchController < ApplicationController
   get "/catches" do
+
     erb :"catches/index"
   end
 

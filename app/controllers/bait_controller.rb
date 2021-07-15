@@ -1,7 +1,14 @@
 class BaitController < ApplicationController
 
   get "/baits" do
-    @baits = Bait.all
+    @user_bait = []
+    @user = User.find(Helpers.current_user(session).id)
+    Bait.all.each do |bait|
+      if bait.user_id.to_i == @user.id
+        @user_bait << bait
+      end
+    end
+    binding.pry
     erb :"baits/index"
   end
 
@@ -15,7 +22,6 @@ class BaitController < ApplicationController
   end
 
   post '/baits' do
-    session[:user_id] = 1
     @bait = Bait.new(name: params["bait_name"], color: params["bait_color"], user_id: session[:user_id])
     @bait.save
     redirect :"baits/#{@bait.id}"
