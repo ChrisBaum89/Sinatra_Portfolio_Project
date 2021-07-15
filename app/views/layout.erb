@@ -8,5 +8,7 @@
     <%= yield %>
   </body>
 <br><br>
+  <% if Helpers.is_logged_in?(session) %>
   <h4><a href="/logout">Log Out</a></h4>
+  <% end %>
 </html>
