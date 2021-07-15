@@ -8,7 +8,6 @@ class BaitController < ApplicationController
         @user_bait << bait
       end
     end
-    binding.pry
     erb :"baits/index"
   end
 

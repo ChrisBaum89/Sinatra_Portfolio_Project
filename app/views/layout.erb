@@ -10,6 +10,8 @@
 <br><br>
   <% if Helpers.is_logged_in?(session) %>
     <h4><a href="/logout">Log Out</a></h4>
+    <h4><a href="/catches">Your Catches</a></h4>
+    <h4><a href="/baits">Your Baits</a></h4>
   <% else %>
     <h4><a href="/login">Log In</a> <br> <a href="/signup">Sign Up</a></h4>
   <% end %>
