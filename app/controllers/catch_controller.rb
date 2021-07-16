@@ -31,24 +31,28 @@ class CatchController < ApplicationController
     #create catch
     @catch = Catch.new()
 
-    #determine if bait is selected or create new bait object if new
-    @bait = params["bait_id_checked"]
-    if @bait == ""
-      @bait = Bait.new(name: params["bait_name"], color: params["bait_color"])
-    else
-      @catch.bait_id = @bait.to_i
-    end
-
-    #create fish
-    @fish = Fish.new(species: params["fish_species"], weight: params["fish_weight"], length: params["fish_length"])
     if @catch.save
           @catch.created_at = Time.now + Time.zone_offset('EST')
+
+          #determine if bait is selected or create new bait object if new
+          @bait = params["bait_id_checked"]
+          if @bait == ""
+            @bait = Bait.new(name: params["bait_name"], color: params["bait_color"], user_id: session[:user_id])
+            @bait.save
+            @catch.bait_id = @bait.id
+          else
+            @catch.bait_id = @bait.to_i
+          end
+
+          #create fish
+          @fish = Fish.new(species: params["fish_species"], weight: params["fish_weight"], length: params["fish_length"], catch_id: @catch.id)
+          @fish.save
+
+          binding.pry
           redirect '/catches'
         else
           redirect '/catches/new'
         end
-
-
     redirect :"baits/#{@bait.id}"
   end
 
