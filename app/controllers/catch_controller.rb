@@ -36,7 +36,7 @@ class CatchController < ApplicationController
 
           #determine if bait is selected or create new bait object if new
           @bait = params["bait_id_checked"]
-          if @bait == ""
+          if @bait == "" || @bait == nil
             @bait = Bait.new(name: params["bait_name"], color: params["bait_color"], user_id: session[:user_id])
             @bait.save
             @catch.bait_id = @bait.id
