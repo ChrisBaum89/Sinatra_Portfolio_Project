@@ -1,7 +1,10 @@
 <h1>Your Catches
 
-<ol>
-<% @user_catches.each do |catch| %>
-    <a href="/catches/<%=bait.id%>"><li> <b>Type:</b> <%=catch.species %>, <b>Weight:</b> <%=catch.weight%>, <b>Length:</b> <%=catch.length%> </li></a>
+<h3><ol>
+<% @user.baits.each do |bait| %>
+  <% bait.catches.each do |catch| %>
+    <a href="/catches/<%=catch.id%>"><li> <b>Species:</b> <%=catch.fish.species %>, <b>Weight:</b> <%=catch.fish.weight%>, <b>Length:</b> <%=catch.fish.length%>, <b>Bait Name: </b><%=Bait.find_by_id(catch.bait_id).name%>, <b>Bait Color: </b><%=Bait.find_by_id(catch.bait_id).color%></li></a>
+  <% end %>
 <% end %>
 </ol>
+</h3>
