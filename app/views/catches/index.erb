@@ -1,2 +1,7 @@
-catches index page
-this page will show all catches that the user has
+<h1>Your Catches
+
+<ol>
+<% @user_catches.each do |catch| %>
+    <a href="/catches/<%=bait.id%>"><li> <b>Type:</b> <%=catch.species %>, <b>Weight:</b> <%=catch.weight%>, <b>Length:</b> <%=catch.length%> </li></a>
+<% end %>
+</ol>

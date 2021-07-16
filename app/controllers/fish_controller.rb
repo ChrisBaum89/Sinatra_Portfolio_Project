@@ -1,5 +1,12 @@
 class FishController < ApplicationController
   get "/fish" do
+    @user_fish = []
+    @user = User.find(Helpers.current_user(session).id)
+    Fish.all.each do |fish|
+      if fish.user_id.to_i == @user.id
+        @user_fish << fish
+      end
+    end
     erb :"fish/index"
   end
 

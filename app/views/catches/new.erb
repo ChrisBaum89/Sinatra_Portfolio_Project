@@ -4,9 +4,9 @@
 
   <!--Existing Bait-->
   <h2>Your Existing Baits</h2>
-  <% @baits.each do |bait| %>
-    <label><%=bait.name%>, <%=bait.color%></label>
-    <input type="checkbox" id="bait_<%=bait.id%>" value="<%=bait.id%>"><br>
+  <% @user_bait.each do |bait| %>
+    <input type="checkbox" id="bait_<%=bait.id%>" name="bait_id_checked" value="<%=bait.id%>">
+    <label><%=bait.name%>, <%=bait.color%></label><br>
   <% end %><br>
 
   <!--New Bait-->
