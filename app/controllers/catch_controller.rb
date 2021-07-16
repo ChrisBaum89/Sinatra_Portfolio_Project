@@ -31,7 +31,7 @@ class CatchController < ApplicationController
     #create catch
     @catch = Catch.new()
 
-    #determine if bait is selected or new
+    #determine if bait is selected or create new bait object if new
     @bait = params["bait_id_checked"]
     if @bait == ""
       @bait = Bait.new(name: params["bait_name"], color: params["bait_color"])
@@ -41,7 +41,12 @@ class CatchController < ApplicationController
 
     #create fish
     @fish = Fish.new(species: params["fish_species"], weight: params["fish_weight"], length: params["fish_length"])
-
+    if @catch.save
+          @catch.created_at = Time.now + Time.zone_offset('EST')
+          redirect '/catches'
+        else
+          redirect '/catches/new'
+        end
 
 
     redirect :"baits/#{@bait.id}"
