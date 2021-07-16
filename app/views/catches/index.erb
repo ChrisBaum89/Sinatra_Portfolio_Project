@@ -1,6 +1,7 @@
 <h1>Your Catches
 
 <h3><ol>
+  <!--#find all user baits, then through baits find user catches -->
 <% @user.baits.each do |bait| %>
   <% bait.catches.each do |catch| %>
     <a href="/catches/<%=catch.id%>"><li> <b>Species:</b> <%=catch.fish.species %>, <b>Weight:</b> <%=catch.fish.weight%>, <b>Length:</b> <%=catch.fish.length%>, <b>Bait Name: </b><%=Bait.find_by_id(catch.bait_id).name%>, <b>Bait Color: </b><%=Bait.find_by_id(catch.bait_id).color%></li></a>
