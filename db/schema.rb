@@ -10,23 +10,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_07_15_225633) do
+ActiveRecord::Schema.define(version: 2021_07_16_012227) do
 
   create_table "baits", force: :cascade do |t|
     t.string "name"
     t.string "color"
-    t.string "user_id"
+    t.integer "user_id"
   end
 
   create_table "catches", force: :cascade do |t|
-    t.datetime "create_time"
+    t.datetime "time"
     t.integer "bait_id"
   end
 
-  create_table "fishes", force: :cascade do |t|
+  create_table "fish", force: :cascade do |t|
     t.string "species"
-    t.integer "weight"
-    t.integer "length"
+    t.string "weight"
+    t.string "length"
     t.integer "catch_id"
   end
 

@@ -28,15 +28,22 @@ class CatchController < ApplicationController
   end
 
   post '/catches' do
+    #create catch
     @catch = Catch.new()
+
+    #determine if bait is selected or new
     @bait = params["bait_id_checked"]
     if @bait == ""
       @bait = Bait.new(name: params["bait_name"], color: params["bait_color"])
     else
       @catch.bait_id = @bait.to_i
     end
-    binding.pry
+
+    #create fish
     @fish = Fish.new(species: params["fish_species"], weight: params["fish_weight"], length: params["fish_length"])
+
+
+
     redirect :"baits/#{@bait.id}"
   end
 
