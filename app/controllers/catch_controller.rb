@@ -48,7 +48,6 @@ class CatchController < ApplicationController
           @fish = Fish.new(species: params["fish_species"], weight: params["fish_weight"], length: params["fish_length"], catch_id: @catch.id)
           @fish.save
 
-          binding.pry
           redirect '/catches'
         else
           redirect '/catches/new'
