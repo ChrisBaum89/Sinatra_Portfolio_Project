@@ -1,11 +1,25 @@
 <h1>Your Catches
 
-<h3><ol>
+<h3>
+  <table style="width:100%">
+    <tr>
+      <th>Species</th>
+      <th>Weight</th>
+      <th>Length</th>
+      <th>Bait</th>
+      <th>Bait Color</th>
+    </tr>
   <!--#find all user baits, then through baits find user catches -->
-<% @user.baits.each do |bait| %>
-  <% bait.catches.each do |catch| %>
-    <a href="/catches/<%=catch.id%>"><li> <b>Species:</b> <%=catch.fish.species %>, <b>Weight:</b> <%=catch.fish.weight%>, <b>Length:</b> <%=catch.fish.length%>, <b>Bait Name: </b><%=Bait.find_by_id(catch.bait_id).name%>, <b>Bait Color: </b><%=Bait.find_by_id(catch.bait_id).color%></li></a>
-  <% end %>
+    <% @user.baits.each do |bait| %>
+      <% bait.catches.each do |catch| %>
+        <tr>
+        <td><a href="/catches/<%=catch.id%>"><%=catch.fish.species %></a></td>
+        <td><%=catch.fish.weight%></td>
+        <td><%=catch.fish.length%></td>
+        <td><%=Bait.find_by_id(catch.bait_id).name%></td>
+        <td><%=Bait.find_by_id(catch.bait_id).color%></td>
+        </tr>
+      <% end %>
+
 <% end %>
-</ol>
 </h3>
