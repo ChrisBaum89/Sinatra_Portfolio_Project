@@ -2,6 +2,7 @@ class BaitController < ApplicationController
 
   get "/baits" do
     @user_bait = []
+    @bait_catches = []
     @user = User.find(Helpers.current_user(session).id)
     Bait.all.each do |bait|
       if bait.user_id.to_i == @user.id

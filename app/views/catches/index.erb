@@ -3,28 +3,27 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <link rel="stylesheet" href="/app/index.css"
 </head>
 
 <h1>Your Catches</h1>
 <p>
-  <table>
+  <table style="width:50%">
     <tr>
-      <th>Species</th>
-      <th>Weight</th>
-      <th>Length</th>
-      <th>Bait</th>
-      <th>Bait Color</th>
+      <th style="border: 1px solid black;">Species</th>
+      <th style="border: 1px solid black;">Weight</th>
+      <th style="border: 1px solid black;">Length</th>
+      <th style="border: 1px solid black;">Bait</th>
+      <th style="border: 1px solid black;">Bait Color</th>
     </tr>
   <!--#find all user baits, then through baits find user catches -->
     <% @user.baits.each do |bait| %>
       <% bait.catches.each do |catch| %>
         <tr>
-          <td><a href="/catches/<%=catch.id%>"><%=catch.fish.species %></a></td>
-          <td><%=catch.fish.weight%> oz</td>
-          <td><%=catch.fish.length%> inches</td>
-          <td><%=Bait.find_by_id(catch.bait_id).name%></td>
-          <td><%=Bait.find_by_id(catch.bait_id).color%></td>
+          <td style="border: 1px solid black;"><a href="/catches/<%=catch.id%>"><%=catch.fish.species %></a></td>
+          <td style="border: 1px solid black;"><%=catch.fish.weight%> oz</td>
+          <td style="border: 1px solid black;"><%=catch.fish.length%> inches</td>
+          <td style="border: 1px solid black;"><%=Bait.find_by_id(catch.bait_id).name%></td>
+          <td style="border: 1px solid black;"><%=Bait.find_by_id(catch.bait_id).color%></td>
         </tr>
       <% end %>
     <% end %>
