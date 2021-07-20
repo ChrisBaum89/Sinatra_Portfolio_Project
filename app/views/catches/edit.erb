@@ -1,1 +1,43 @@
-catches edit page
+<h1>Edit Catch Information</h1>
+<% if Helpers.is_logged_in?(session) %>
+<%= @error %>
+  <form action='/catches/<%=:id%>' method="post">
+    <input type="hidden" name="_method" value="patch">
+    <input type="hidden" name="catch_id" value="<%=@catch.id%>">
+
+    <h2>Fish Information</h2>
+    <label for="fish_species">Species</label>
+    <input type="text" name="fish_species" value="<%=@catch.fish.species%>"><br>
+
+    <label for="fish_weight">Weight</label>
+    <input type="text" name="fish_weight" value="<%=@catch.fish.weight%>"><br>
+
+    <label for="fish_length">Length</label>
+    <input type="text" name="fish_length" value="<%=@catch.fish.length%>">
+
+
+    <h2>Your Existing Baits</h2>
+    <% @user_bait.each do |bait| %>
+      <input type="checkbox" id="bait_<%=bait.id%>" name="bait_id_checked" value="<%=bait.id%>"
+      <%if bait.id == @bait.id%>
+        checked
+      <%end%>>
+      <label><%=bait.name%>, <%=bait.color%></label><br>
+    <% end %><br>
+
+    <!--New Bait-->
+    <h2>New Bait</h2>
+    <label for="bait_name">Name: </label>
+    <input type="text" name="bait_name"><br><br>
+    <label for="bait_color">Color: </label>
+    <input type="text" name="bait_color"><br><br>
+
+    <br><br>
+
+    <input type="submit" value="Submit Updates">
+
+  </form>
+
+  <% else %>
+      <h1> You Must Be Logged in </h1>
+  <% end %>
