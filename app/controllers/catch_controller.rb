@@ -73,13 +73,16 @@ class CatchController < ApplicationController
   patch '/catches/:id' do
     @catch = Catch.find_by_id(params[:catch_id])
     if Helpers.fish_valid(params) && Helpers.bait_valid(params)
-      binding.pry
-      @bait.name = params[:bait_name]
-      @bait.color= params[:bait_color]
-      @bait.save
-      redirect "/baits/#{@bait.id}"
+      if params[:bait_id_checked] != nil
+        @bait = Bait.find_by_id(params[:bait_id_checked])
+      else
+        @bait = Helpers.new_bait(params)
+      end
+      @catch.bait_id = @bait.id
+      @catch.save
+      redirect "/catches/#{@catch.id}"
     else
-      redirect "/baits/#{@bait.id}/edit"
+      redirect "/catches/#{@catch.id}/edit"
     end
   end
 
