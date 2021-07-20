@@ -1,1 +1,21 @@
-bait edit page
+<h1>Edit Bait</h1>
+
+<% if Helpers.is_logged_in?(session) %>
+<%= @error %>
+  <form action='/baits/<%=:id%>' method="post">
+    <input type="hidden" name="_method" value="patch">
+    <input type="hidden" name="bait_id" value="<%=@bait.id%>">
+
+    <label for="bait_name">Bait Name</label>
+    <input type="text" name="bait_name" value="<%=@bait.name%>"><br>
+
+    <label for="bait_color">Bait Color</label>
+    <input type="text" name="bait_color" value="<%=@bait.color%>"><br><br>
+
+    <input type="submit" value="Submit Updates">
+
+  </form>
+
+  <% else %>
+      <h1> You Must Be Logged in </h1>
+  <% end %>
