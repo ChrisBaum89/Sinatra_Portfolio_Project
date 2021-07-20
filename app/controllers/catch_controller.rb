@@ -18,8 +18,7 @@ class CatchController < ApplicationController
 
   get "/catches/:id" do
       @catch = Catch.find_by_id(params[:id])
-      @catch_creator = User.find_by_id(@catch.user_id)
-      binding.pry
+      @bait = Bait.find_by_id(@catch.bait_id)
       erb :"catches/show"
   end
 
