@@ -36,19 +36,23 @@ class CatchController < ApplicationController
   end
 
   get "/catches/:id/edit" do
-    @catch = Catch.find_by_id(params[:id])
-    @bait = Bait.find_by_id(@catch.bait_id)
-    @user = User.find(Helpers.current_user(session).id)
-    @user_bait = []
-    if @catch && (Helpers.current_user(session).id == @bait.user_id)
-      Bait.all.each do |bait|
-        if bait.user_id.to_i == @user.id
-          @user_bait << bait
+    if Helpers.is_logged_in?(session)
+      catch = Catch.find_by_id(params[:id])
+      @bait = Bait.find_by_id(@catch.bait_id)
+      @user = User.find(Helpers.current_user(session).id)
+      @user_bait = []
+      if @catch && (Helpers.current_user(session).id == @bait.user_id)
+        Bait.all.each do |bait|
+          if bait.user_id.to_i == @user.id
+            @user_bait << bait
+          end
         end
+        erb :"catches/edit"
+      elsif Helpers.is_logged_in?(session)
+        redirect '/catches'
+      else
+        redirect '/login'
       end
-      erb :"catches/edit"
-    elsif Helpers.is_logged_in?(session)
-      redirect '/catches'
     else
       redirect '/login'
     end
