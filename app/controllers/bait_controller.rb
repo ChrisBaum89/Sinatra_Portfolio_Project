@@ -33,7 +33,8 @@ class BaitController < ApplicationController
   end
 
   post '/baits' do
-    Helpers.new_bait(params)
+    @user = User.find(Helpers.current_user(session).id)
+    @bait = Helpers.new_bait(params, @user)
     redirect :"baits/#{@bait.id}"
   end
 
