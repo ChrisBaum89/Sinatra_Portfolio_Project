@@ -10,14 +10,18 @@ class CatchController < ApplicationController
   end
 
   get "/catches/new" do
-    @user_bait = []
-    @user = User.find(Helpers.current_user(session).id)
-    Bait.all.each do |bait|
-      if bait.user_id.to_i == @user.id
-        @user_bait << bait
+    if Helpers.is_logged_in?(session)
+      @user_bait = []
+      @user = User.find(Helpers.current_user(session).id)
+      Bait.all.each do |bait|
+        if bait.user_id.to_i == @user.id
+          @user_bait << bait
+        end
       end
-    end
       erb :"catches/new"
+    else
+      redirect '/login'
+    end
   end
 
   get "/catches/:id" do
