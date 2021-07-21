@@ -1,6 +1,14 @@
 <h1>New Catch</h1>
 
 <form action="/catches" method="post">
+  <!--New Fish-->
+  <h2>Fish Information</h2>
+  <label for="fish_species">Species: </label>
+  <input type="text" name="fish_species"><br><br>
+  <label for="fish_weight">Weight: </label>
+  <input type="number" name="fish_weight"> oz<br><br>
+  <label for="fish_length">Length: </label>
+  <input type="number" name="fish_length"> inches<br><br>
 
   <!--Existing Bait-->
   <h2>Your Existing Baits</h2>
@@ -15,15 +23,6 @@
   <input type="text" name="bait_name"><br><br>
   <label for="bait_color">Color: </label>
   <input type="text" name="bait_color"><br><br>
-
-  <!--New Fish-->
-  <h2>Fish Information</h2>
-  <label for="fish_species">Species: </label>
-  <input type="text" name="fish_species"><br><br>
-  <label for="fish_weight">Weight: </label>
-  <input type="number" name="fish_weight"><br><br>
-  <label for="fish_length">Length: </label>
-  <input type="number" name="fish_length"><br><br>
 
   <!--submit-->
   <input type="submit" value="Create Catch">
