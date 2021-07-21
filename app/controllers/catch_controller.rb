@@ -1,8 +1,12 @@
 class CatchController < ApplicationController
   get "/catches" do
-    @user_catches = []
-    @user = User.find(Helpers.current_user(session).id)
-    erb :"catches/index"
+    if Helpers.is_logged_in?(session)
+      @user_catches = []
+      @user = User.find(Helpers.current_user(session).id)
+      erb :"catches/index"
+    else
+      redirect '/login'
+    end
   end
 
   get "/catches/new" do
@@ -17,9 +21,11 @@ class CatchController < ApplicationController
   end
 
   get "/catches/:id" do
+    binding.pry
+    @user = User.find(Helpers.current_user(session).id)
       @catch = Catch.find_by_id(params[:id])
       @bait = Bait.find_by_id(@catch.bait_id)
-      erb :"catches/show"
+    erb :"catches/show"
   end
 
   get "/catches/:id/edit" do
