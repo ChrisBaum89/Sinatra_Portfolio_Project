@@ -87,7 +87,8 @@ class CatchController < ApplicationController
       end
       @catch.bait_id = @bait.id
 
-      #save catch
+      #save catch and fish
+      @catch.fish.save
       @catch.save
       redirect "/catches/#{@catch.id}"
     else

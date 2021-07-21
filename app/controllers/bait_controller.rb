@@ -33,14 +33,13 @@ class BaitController < ApplicationController
   end
 
   post '/baits' do
-    @bait = Bait.new(name: params["bait_name"], color: params["bait_color"], user_id: session[:user_id])
-    @bait.save
+    Helpers.new_bait(params)
     redirect :"baits/#{@bait.id}"
   end
 
   patch '/baits/:id' do
     @bait = Bait.find_by_id(params[:bait_id])
-    if (params[:bait_name] != "") && (params[:bait_color] != "")
+    if Helpers.bait_valid(params)
       @bait.name = params[:bait_name]
       @bait.color= params[:bait_color]
       @bait.save
