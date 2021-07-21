@@ -15,8 +15,9 @@ class Helpers
     ((params[:bait_name] != "") && (params[:bait_color] != "") || (params[:bait_id_checked] != nil))
   end
 
-  def self.new_bait(params)
-    @bait = Bait.new(name: params["bait_name"], color: params["bait_color"], user_id: session[:user_id])
+  def self.new_bait(params, user)
+    @bait = Bait.new(name: params["bait_name"], color: params["bait_color"], user_id: user.id)
     @bait.save
+    @bait
   end
 end
