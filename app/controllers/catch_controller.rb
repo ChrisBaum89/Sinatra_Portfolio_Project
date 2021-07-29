@@ -2,7 +2,7 @@ class CatchController < ApplicationController
   get "/catches" do
     if Helpers.is_logged_in?(session)
       @user_catches = []
-      @user = User.find(Helpers.current_user(session).id)
+      @user = Helpers.current_user(session)
       erb :"catches/index"
     else
       redirect '/login'
@@ -12,7 +12,7 @@ class CatchController < ApplicationController
   get "/catches/new" do
     if Helpers.is_logged_in?(session)
       @user_bait = []
-      @user = User.find(Helpers.current_user(session).id)
+      @user = Helpers.current_user(session)
       Bait.all.each do |bait|
         if bait.user_id.to_i == @user.id
           @user_bait << bait
@@ -26,7 +26,7 @@ class CatchController < ApplicationController
 
   get "/catches/:id" do
     if Helpers.is_logged_in?(session)
-      @user = User.find(Helpers.current_user(session).id)
+      @user = Helpers.current_user(session)
       @catch = Catch.find_by_id(params[:id])
       @bait = Bait.find_by_id(@catch.bait_id)
       erb :"catches/show"
@@ -39,7 +39,7 @@ class CatchController < ApplicationController
     if Helpers.is_logged_in?(session)
       @catch = Catch.find_by_id(params[:id])
       @bait = Bait.find_by_id(@catch.bait_id)
-      @user = User.find(Helpers.current_user(session).id)
+      @user = Helpers.current_user(session)
       @user_bait = []
 
       #verifies if the user is the owner of the catch
@@ -91,12 +91,12 @@ class CatchController < ApplicationController
   end
 
   patch '/catches/:id' do
-    @user = User.find(Helpers.current_user(session).id)
+    @user = Helpers.current_user(session)
     @catch = Catch.find_by_id(params[:catch_id])
     if Helpers.fish_valid(params) && Helpers.bait_valid(params)
 
       #set to fish information to new values
-      Helpers.catch_fish_info(params)
+      Helpers.catch_fish_info(@catch, params)
 
       #verify if a checked bait is selected or if a new bait must be created
       if params[:bait_id_checked] != nil
