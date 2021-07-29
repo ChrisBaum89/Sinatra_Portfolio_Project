@@ -21,7 +21,8 @@ class Helpers
     @bait
   end
 
-  def self.catch_fish_info(params)
+  def self.catch_fish_info(catch, params)
+    @catch = catch
     @catch.fish.species = params[:fish_species]
     @catch.fish.weight = params[:fish_weight]
     @catch.fish.length = params[:fish_length]
