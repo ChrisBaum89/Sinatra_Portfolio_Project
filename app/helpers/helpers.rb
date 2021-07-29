@@ -15,8 +15,8 @@ class Helpers
     ((params[:bait_name] != "") && (params[:bait_color] != "") || (params[:bait_id_checked] != nil))
   end
 
-  def self.new_bait(params, user)
-    @bait = Bait.new(name: params["bait_name"], color: params["bait_color"], user_id: user.id)
+  def self.new_bait(params, user_id)
+    @bait = Bait.new(name: params["bait_name"], color: params["bait_color"], user_id: user_id.id)
     @bait.save
     @bait
   end
@@ -32,6 +32,7 @@ class Helpers
     @catch = catch
     @fish = Fish.new(species: params["fish_species"], weight: params["fish_weight"], length: params["fish_length"], catch_id: @catch.id)
     @fish.save
+    @fish
   end
 
 end

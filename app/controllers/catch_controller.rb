@@ -64,6 +64,7 @@ class CatchController < ApplicationController
   post '/catches' do
     #create catch
     @catch = Catch.new()
+    @user = Helpers.current_user(session)
 
     if @catch.save
       @catch.created_at = Time.now + Time.zone_offset('EST')
@@ -71,8 +72,9 @@ class CatchController < ApplicationController
       #determine if bait is selected or create new bait object if new
       @bait = params["bait_id_checked"]
       if @bait == "" || @bait == nil
-        @bait = Bait.new(name: params["bait_name"], color: params["bait_color"], user_id: session[:user_id])
-        @bait.save
+        #@bait = Bait.new(name: params["bait_name"], color: params["bait_color"], user_id: session[:user_id])
+        #@bait.save
+        @bait = Helpers.new_bait(params, @user)
         @catch.bait_id = @bait.id
       else
         @catch.bait_id = @bait.to_i

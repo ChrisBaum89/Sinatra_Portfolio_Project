@@ -20,7 +20,7 @@
     <% @user.baits.each do |bait| %>
       <% bait.catches.each do |catch| %>
         <tr>
-          <td style="border: 1px solid black;"><a href="/catches/<%=catch.id%>"><%=catch.fish.species %></a></td>
+          <td style="border: 1px solid black;"><a href="/catches/<%=catch.id%>"><%=catch.fish.species%></a></td>
           <td style="border: 1px solid black;"><%=catch.fish.weight%> oz</td>
           <td style="border: 1px solid black;"><%=catch.fish.length%> inches</td>
           <td style="border: 1px solid black;"><%=Bait.find_by_id(catch.bait_id).name%></td>
