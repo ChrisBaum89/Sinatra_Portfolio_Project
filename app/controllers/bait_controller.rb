@@ -34,11 +34,15 @@ class BaitController < ApplicationController
   end
 
   get "/baits/:id/edit" do
-    @bait = Bait.find_by_id(params[:id])
-    if @bait && (Helpers.current_user(session).id == @bait.user_id)
-      erb :"baits/edit"
-    elsif Helpers.is_logged_in?(session)
-      redirect '/baits'
+    if Helpers.is_logged_in?(session)
+      @bait = Bait.find_by_id(params[:id])
+      if @bait && (Helpers.current_user(session).id == @bait.user_id)
+        erb :"baits/edit"
+      elsif Helpers.is_logged_in?(session)
+        redirect '/baits'
+      else
+        redirect '/login'
+      end
     else
       redirect '/login'
     end
