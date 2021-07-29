@@ -3,7 +3,6 @@ class BaitController < ApplicationController
   get "/baits" do
     if Helpers.is_logged_in?(session)
       @user_bait = []
-      #@bait_catches = []
       @user = Helpers.current_user(session)
       Bait.all.each do |bait|
         if bait.user_id.to_i == @user.id
