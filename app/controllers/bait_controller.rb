@@ -17,7 +17,11 @@ class BaitController < ApplicationController
   end
 
   get "/baits/new" do
+    if Helpers.is_logged_in?(session)
       erb :"baits/new"
+    else
+      redirect '/login'
+    end
   end
 
   get "/baits/:id" do
