@@ -1,15 +1,19 @@
 class BaitController < ApplicationController
 
   get "/baits" do
-    @user_bait = []
-    @bait_catches = []
-    @user = User.find(Helpers.current_user(session).id)
-    Bait.all.each do |bait|
-      if bait.user_id.to_i == @user.id
-        @user_bait << bait
+    if Helpers.is_logged_in?(session)
+      @user_bait = []
+      @bait_catches = []
+      @user = User.find(Helpers.current_user(session).id)
+      Bait.all.each do |bait|
+        if bait.user_id.to_i == @user.id
+          @user_bait << bait
+        end
       end
+      erb :"baits/index"
+    else
+      redirect '/login'
     end
-    erb :"baits/index"
   end
 
   get "/baits/new" do
