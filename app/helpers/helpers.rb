@@ -28,4 +28,10 @@ class Helpers
     @catch.fish.length = params[:fish_length]
   end
 
+  def self.new_fish(catch, session, params)
+    @catch = catch
+    @fish = Fish.new(species: params["fish_species"], weight: params["fish_weight"], length: params["fish_length"], catch_id: @catch.id)
+    @fish.save
+  end
+
 end
