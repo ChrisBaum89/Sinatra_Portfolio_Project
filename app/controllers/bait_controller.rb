@@ -3,8 +3,8 @@ class BaitController < ApplicationController
   get "/baits" do
     if Helpers.is_logged_in?(session)
       @user_bait = []
-      @bait_catches = []
-      @user = User.find(Helpers.current_user(session).id)
+      #@bait_catches = []
+      @user = Helpers.current_user(session)
       Bait.all.each do |bait|
         if bait.user_id.to_i == @user.id
           @user_bait << bait
@@ -52,7 +52,7 @@ class BaitController < ApplicationController
   end
 
   post '/baits' do
-    @user = User.find(Helpers.current_user(session).id)
+    @user = Helpers.current_user(session)
     @bait = Helpers.new_bait(params, @user)
     redirect :"baits/#{@bait.id}"
   end
