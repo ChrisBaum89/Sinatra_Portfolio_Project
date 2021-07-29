@@ -87,7 +87,7 @@ class CatchController < ApplicationController
     else
       redirect '/catches/new'
     end
-    redirect :"baits/#{@bait.id}"
+    redirect :"catches/#{@catch.id}"
   end
 
   patch '/catches/:id' do
