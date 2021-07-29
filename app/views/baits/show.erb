@@ -1,12 +1,5 @@
 <h3>Bait Name: <%=@bait.name%></h3>
 <h3>Bait Color: <%=@bait.color%></h3>
 
-<form action="/baits/:id/edit">
-  <input type="hidden" name="bait_id" value="<%=@bait.id%>">
-  <input type="submit" value="Edit Bait">
-</form>
-
-<form action="/baits/:id/delete">
-  <input type="hidden" name="bait_id" value="<%=@bait.id%>">
-  <input type="submit" value="Delete Bait">
-</form>
+<a href="/baits/<%=@bait.id%>/edit">Edit Bait</a>
+<a href="/baits/<%=@bait.id%>/delete">Delete Bait</a>
