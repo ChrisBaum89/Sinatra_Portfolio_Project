@@ -117,4 +117,14 @@ class CatchController < ApplicationController
     end
   end
 
+  get '/catches/:id/delete' do
+    if Helpers.is_logged_in?(session)
+      @catch = Catch.find_by_id(params[:id])
+      @catch.delete
+      redirect "/catches"
+    else
+      redirect '/login'
+    end
+  end
+
 end
