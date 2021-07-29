@@ -20,4 +20,10 @@ class Helpers
     @bait.save
     @bait
   end
+
+  def self.catch_bait_user_id_find(params)
+    @catch = Catch.find_by_id(params[:id])
+    @bait = Bait.find_by_id(@catch.bait_id)
+    @user = User.find(Helpers.current_user(session).id)
+  end
 end

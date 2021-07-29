@@ -48,11 +48,6 @@ class CatchController < ApplicationController
           end
         end
         erb :"catches/edit"
-      elsif Helpers.is_logged_in?(session)
-        redirect '/catches'
-      else
-        redirect '/login'
-      end
     else
       redirect '/login'
     end
