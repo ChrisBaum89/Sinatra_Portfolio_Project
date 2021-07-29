@@ -96,9 +96,7 @@ class CatchController < ApplicationController
     if Helpers.fish_valid(params) && Helpers.bait_valid(params)
 
       #set to fish information to new values
-      @catch.fish.species = params[:fish_species]
-      @catch.fish.weight = params[:fish_weight]
-      @catch.fish.length = params[:fish_length]
+      Helpers.catch_fish_info(params)
 
       #verify if a checked bait is selected or if a new bait must be created
       if params[:bait_id_checked] != nil
