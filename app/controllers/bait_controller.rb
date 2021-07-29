@@ -25,8 +25,12 @@ class BaitController < ApplicationController
   end
 
   get "/baits/:id" do
+    if Helpers.is_logged_in?(session)
       @bait = Bait.find_by_id(params[:id])
       erb :"baits/show"
+    else
+      redirect '/login'
+    end
   end
 
   get "/baits/:id/edit" do
