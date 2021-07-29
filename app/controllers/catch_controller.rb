@@ -37,7 +37,7 @@ class CatchController < ApplicationController
 
   get "/catches/:id/edit" do
     if Helpers.is_logged_in?(session)
-      catch = Catch.find_by_id(params[:id])
+      @catch = Catch.find_by_id(params[:id])
       @bait = Bait.find_by_id(@catch.bait_id)
       @user = User.find(Helpers.current_user(session).id)
       @user_bait = []
@@ -88,6 +88,7 @@ class CatchController < ApplicationController
   end
 
   patch '/catches/:id' do
+    @user = User.find(Helpers.current_user(session).id)
     @catch = Catch.find_by_id(params[:catch_id])
     if Helpers.fish_valid(params) && Helpers.bait_valid(params)
 
@@ -100,7 +101,7 @@ class CatchController < ApplicationController
       if params[:bait_id_checked] != nil
         @bait = Bait.find_by_id(params[:bait_id_checked])
       else
-        @bait = Helpers.new_bait(params)
+        @bait = Helpers.new_bait(params,@user)
       end
       @catch.bait_id = @bait.id
 
