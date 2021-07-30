@@ -32,13 +32,6 @@ class Helpers
     @catch.fish.length = params[:fish_length]
   end
 
-  def self.new_fish(catch, session, params)
-    @catch = catch
-    @fish = Fish.new(species: params["fish_species"], weight: params["fish_weight"], length: params["fish_length"], catch_id: @catch.id)
-    @fish.save
-    @fish
-  end
-
   def self.existing_bait_valid(params)
     (params[:bait_id_checked] != "") && (params[:bait_name] == "") && (params[:bait_color] == "")
   end
