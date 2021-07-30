@@ -62,33 +62,52 @@ class CatchController < ApplicationController
   end
 
   post '/catches' do
-    #create catch
-    @catch = Catch.new()
     @user = Helpers.current_user(session)
+    @catch = Catch.new()
 
-    if @catch.save
-      @catch.created_at = Time.now + Time.zone_offset('EST')
-
-      #determine if bait is selected or create new bait object if new
-      @bait = params["bait_id_checked"]
-      if @bait == "" || @bait == nil
-        #@bait = Bait.new(name: params["bait_name"], color: params["bait_color"], user_id: session[:user_id])
-        #@bait.save
-        @bait = Helpers.new_bait(params, @user)
-        @catch.bait_id = @bait.id
-      else
-        @catch.bait_id = @bait.to_i
-      end
-      @catch.save
-
-      #create fish
-      Helpers.new_fish(@catch, session, params)
-
-      redirect "/catches/#{@catch.id}"
+    if Helpers.fish_valid(params)
+      @fish = Fish.new()
+      @fish.species = params[:fish_species]
+      @fish.weight = params[:fish_weight]
+      @fish.length = params[:fish_length]
     else
       redirect '/catches/new'
     end
-    redirect "/catches/#{@catch.id}"
+
+    if Helpers.existing_bait_valid(params)
+      binding.pry
+    elsif Helpers.new_bait_valid(params)
+
+    else
+      redirect '/catches/new'
+    end
+
+    ##create catch
+    # @catch = Catch.new()
+    # @user = Helpers.current_user(session)
+    #
+    # if @catch.save
+    #   @catch.created_at = Time.now + Time.zone_offset('EST')
+    #
+    #   #determine if bait is selected or create new bait object if new
+    #   @bait = params["bait_id_checked"]
+    #   if (@bait == "" || @bait == nil)
+    #     @bait = Helpers.new_bait(params, @user)
+    #     @catch.bait_id = @bait.id
+    #   else
+    #     @catch.bait_id = @bait.to_i
+    #   end
+    #   @catch.save
+    #
+    #   #create fish
+    #   Helpers.new_fish(@catch, session, params)
+
+
+      #redirect "/catches/#{@catch.id}"
+    #else
+      #redirect '/catches/new'
+    #end
+    #redirect "/catches/#{@catch.id}"
   end
 
   patch '/catches/:id' do
