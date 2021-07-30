@@ -65,8 +65,9 @@ class CatchController < ApplicationController
     @user = Helpers.current_user(session)
     @catch = Catch.new()
 
+    #create fish object
     if Helpers.fish_valid(params)
-      @fish = Fish.new()
+      @fish = Fish.new(species: params["fish_species"], weight: params["fish_weight"], length: params["fish_length"], catch_id: nil)
       @fish.species = params[:fish_species]
       @fish.weight = params[:fish_weight]
       @fish.length = params[:fish_length]
@@ -74,40 +75,21 @@ class CatchController < ApplicationController
       redirect '/catches/new'
     end
 
+    #verify if existing bait is selected and assign it or create a new bait object
     if Helpers.existing_bait_valid(params)
-      binding.pry
+      @catch.bait_id = params[:bait_id_checked]
     elsif Helpers.new_bait_valid(params)
-
+      @bait = Bait.new()
+      @bait.name = params[:bait_name]
+      @bait.color = params[:bait_color]
+      @bait.user_id = @user.id
     else
       redirect '/catches/new'
     end
 
-    ##create catch
-    # @catch = Catch.new()
-    # @user = Helpers.current_user(session)
-    #
-    # if @catch.save
-    #   @catch.created_at = Time.now + Time.zone_offset('EST')
-    #
-    #   #determine if bait is selected or create new bait object if new
-    #   @bait = params["bait_id_checked"]
-    #   if (@bait == "" || @bait == nil)
-    #     @bait = Helpers.new_bait(params, @user)
-    #     @catch.bait_id = @bait.id
-    #   else
-    #     @catch.bait_id = @bait.to_i
-    #   end
-    #   @catch.save
-    #
-    #   #create fish
-    #   Helpers.new_fish(@catch, session, params)
+    #all info valid, then save catch, save fish, and if applicable, save bait
 
 
-      #redirect "/catches/#{@catch.id}"
-    #else
-      #redirect '/catches/new'
-    #end
-    #redirect "/catches/#{@catch.id}"
   end
 
   patch '/catches/:id' do
