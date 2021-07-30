@@ -81,7 +81,6 @@ class CatchController < ApplicationController
       redirect '/catches/new'
     end
 
-    Helpers.catch_valid(params)
     #all info valid, then save catch, save fish, and if applicable, save bait
     if Helpers.fish_valid(params) && (Helpers.existing_bait_valid(params) || Helpers.new_bait_valid(params))
       @catch.created_at = Time.now + Time.zone_offset('EST')
