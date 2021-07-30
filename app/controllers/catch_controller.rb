@@ -68,9 +68,6 @@ class CatchController < ApplicationController
     #create fish object
     if Helpers.fish_valid(params)
       @fish = Fish.new(species: params["fish_species"], weight: params["fish_weight"], length: params["fish_length"], catch_id: nil)
-      @fish.species = params[:fish_species]
-      @fish.weight = params[:fish_weight]
-      @fish.length = params[:fish_length]
     else
       redirect '/catches/new'
     end
@@ -79,16 +76,25 @@ class CatchController < ApplicationController
     if Helpers.existing_bait_valid(params)
       @catch.bait_id = params[:bait_id_checked]
     elsif Helpers.new_bait_valid(params)
-      @bait = Bait.new()
-      @bait.name = params[:bait_name]
-      @bait.color = params[:bait_color]
-      @bait.user_id = @user.id
+      @bait = Bait.new(name: params[:bait_name], color: params[:bait_color], user_id: @user.id)
     else
       redirect '/catches/new'
     end
 
+    Helpers.catch_valid(params)
     #all info valid, then save catch, save fish, and if applicable, save bait
-
+    if Helpers.fish_valid(params) && (Helpers.existing_bait_valid(params) || Helpers.new_bait_valid(params))
+      @catch.created_at = Time.now + Time.zone_offset('EST')
+      @catch.save
+      @fish.catch_id = @catch.id
+      @fish.save
+      if Helpers.new_bait_valid(params)
+        @bait.save
+      end
+      redirect '/catches'
+    else
+      redirect '/catches/new'
+    end
 
   end
 
