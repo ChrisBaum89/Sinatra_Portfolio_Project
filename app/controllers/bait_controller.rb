@@ -51,9 +51,13 @@ class BaitController < ApplicationController
   end
 
   post '/baits' do
-    @user = Helpers.current_user(session)
-    @bait = Helpers.new_bait(params, @user)
-    redirect :"baits/#{@bait.id}"
+    if Helpers.bait_valid(params)
+      @user = Helpers.current_user(session)
+      @bait = Helpers.new_bait(params, @user)
+      redirect "/baits/#{@bait.id}"
+    else
+      redirect "/baits/new"
+    end
   end
 
   patch '/baits/:id' do
