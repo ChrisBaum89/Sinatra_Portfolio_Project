@@ -75,7 +75,16 @@ class BaitController < ApplicationController
   get '/baits/:id/delete' do
     if Helpers.is_logged_in?(session)
       @bait = Bait.find_by_id(params[:id])
+      #find all catches and fish associated with the bait and delete
+      Catch.all.each do |catch|
+        if catch.bait_id == @bait.id
+          if catch.fish != nil
+            catch.fish.delete
+          end
+          catch.delete
+        end
       @bait.delete
+      end
       redirect "/baits"
     else
       redirect '/login'
