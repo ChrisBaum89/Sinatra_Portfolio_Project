@@ -33,11 +33,13 @@ class Helpers
   end
 
   def self.existing_bait_valid(params)
-    (params[:bait_id_checked] != "") && (params[:bait_name] == "") && (params[:bait_color] == "")
+    existing_bait_good = (params[:bait_id_checked] != "") && (params[:bait_id_checked] != nil)
+    new_bait_empty = (params[:bait_name] == "") && (params[:bait_color] == "")
+    existing_bait_good && new_bait_empty
   end
 
   def self.new_bait_valid(params)
-    (params[:bait_id_checked] == "") && (params[:bait_name] != "") && (params[:bait_color] != "")
+    (params[:bait_id_checked] == nil) && (params[:bait_name] != "") && (params[:bait_color] != "")
   end
 
 end
