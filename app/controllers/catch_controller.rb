@@ -84,11 +84,16 @@ class CatchController < ApplicationController
     #all info valid, then save catch, save fish, and if applicable, save bait
     if Helpers.fish_valid(params) && (Helpers.existing_bait_valid(params) || Helpers.new_bait_valid(params))
       @catch.created_at = Time.now + Time.zone_offset('EST')
-      @catch.save
+      @catch.save #create catch
       @fish.catch_id = @catch.id
       @fish.save
       if Helpers.new_bait_valid(params)
         @bait.save
+        @catch.bait_id = @bait.id
+        @catch.save
+      elsif Helpers.existing_bait_valid(params)
+        @catch.bait_id = params[:bait_id_checked]
+        @catch.save
       end
       redirect '/catches'
     else
