@@ -26,6 +26,9 @@ class BaitController < ApplicationController
   get "/baits/:id" do
     if Helpers.is_logged_in?(session)
       @bait = Bait.find_by_id(params[:id])
+      if @bait.user_id != Helpers.current_user(session).id
+        redirect '/baits'
+      end
       erb :"baits/show"
     else
       redirect '/login'
