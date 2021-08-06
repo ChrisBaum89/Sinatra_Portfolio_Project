@@ -11,7 +11,7 @@ Specs:
 - [x] Ensure that users can't modify content created by other users - code includes verification that user is logged in to render a page and redirects to Login page if not logged in.  Also includes functionality that only a user who owns a bait/catch can see/edit/destroy.
 - [x] Include user input validations - user signup, creating new baits, creating new catches all have validations of the user input.  Also validate that a user owns specific catches and baits before allowing them to view/edit.
 - [ ] BONUS - not required - Display validation failures to user with error message (example form URL e.g. /posts/new)
-- [ ] Your README.md includes a short description, install instructions, a contributors guide and a link to the license for your code
+- [x] Your README.md includes a short description, install instructions, a contributors guide and a link to the license for your code - readme created. Did not include install instructions as this is meant to run on a server and be accessible through the web. Shotgun was used as a local server for viewing and troubleshooting.
 
 Confirm
 - [x] You have a large number of small Git commits - commited often as I progressed
