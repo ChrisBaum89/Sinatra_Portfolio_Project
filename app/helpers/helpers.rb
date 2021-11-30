@@ -26,6 +26,7 @@ class Helpers
     @bait
   end
 
+  #allows assignment of fish info through a catch
   def self.catch_fish_info(catch, params)
     @catch = catch
     @catch.fish.species = params[:fish_species]
@@ -33,12 +34,14 @@ class Helpers
     @catch.fish.length = params[:fish_length]
   end
 
+  #verifies existing bait information is good
   def self.existing_bait_valid(params)
     existing_bait_good = (params[:bait_id_checked] != "") && (params[:bait_id_checked] != nil)
     new_bait_empty = (params[:bait_name] == "") && (params[:bait_color] == "")
     existing_bait_good && new_bait_empty
   end
 
+  #return true if all new Bait model attributes are present in the params
   def self.new_bait_valid(params)
     (params[:bait_id_checked] == nil) && (params[:bait_name] != "") && (params[:bait_color] != "")
   end
