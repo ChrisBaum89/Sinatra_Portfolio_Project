@@ -8,7 +8,7 @@
       <th style="border: 1px solid black;">Color</th>
       <th style="border: 1px solid black;"># of Catches</th>
     </tr>
-    <% @user_bait.each do |bait| %>
+    <% @user.baits.each do |bait| %>
       <tr>
         <td style="border: 1px solid black;"><a href="/baits/<%=bait.id%>"><%=bait.name%></a></td>
         <td style="border: 1px solid black;"><%=bait.color%></td>
