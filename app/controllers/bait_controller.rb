@@ -1,6 +1,7 @@
 class BaitController < ApplicationController
 
   get "/baits" do
+    #if user is logged in, find all bait owned by the user and set to @user_bait
     if Helpers.is_logged_in?(session)
       @user_bait = []
       @user = Helpers.current_user(session)
@@ -10,12 +11,14 @@ class BaitController < ApplicationController
         end
       end
       erb :"baits/index"
+    #if user is not logged in, redirect to login
     else
       redirect '/login'
     end
   end
 
   get "/baits/new" do
+    #only allow user to route to baits/new if they are logged in
     if Helpers.is_logged_in?(session)
       erb :"baits/new"
     else
@@ -24,6 +27,7 @@ class BaitController < ApplicationController
   end
 
   get "/baits/:id" do
+    #if user is logged in and bait is found, render baits/show, else redirect to /baits
     if Helpers.is_logged_in?(session)
       @bait = Bait.find_by_id(params[:id])
       if @bait
@@ -34,16 +38,16 @@ class BaitController < ApplicationController
       else
         redirect '/baits'
       end
+    #if user not logged in, redirect to login
     else
       redirect '/login'
     end
   end
 
   get "/baits/:id/edit" do
-
+    #allow route to baits/edit if user logged in, bait is found, and belongs to current user
     if Helpers.is_logged_in?(session)
       @bait = Bait.find_by_id(params[:id])
-
       if @bait && (Helpers.current_user(session).id == @bait.user_id)
         erb :"baits/edit"
       elsif Helpers.is_logged_in?(session)
