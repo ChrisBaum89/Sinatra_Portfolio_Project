@@ -62,22 +62,27 @@ class BaitController < ApplicationController
   end
 
   post '/baits' do
+    #verify that bait is valid before creating new bait
     if Helpers.bait_valid(params)
       @user = Helpers.current_user(session)
       @bait = Helpers.new_bait(params, @user)
       redirect "/baits/#{@bait.id}"
+    #if bait not valid, redirect to baits/new
     else
       redirect "/baits/new"
     end
   end
 
   patch '/baits/:id' do
+    #find bait to edit
     @bait = Bait.find_by_id(params[:bait_id])
+    #if bait params valid, assign new values and save
     if Helpers.bait_valid(params)
       @bait.name = params[:bait_name]
       @bait.color= params[:bait_color]
       @bait.save
       redirect "/baits/#{@bait.id}"
+    #if bait not valid, redirect to edit page
     else
       redirect "/baits/#{@bait.id}/edit"
     end
