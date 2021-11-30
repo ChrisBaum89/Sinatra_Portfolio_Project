@@ -45,6 +45,7 @@ class CatchController < ApplicationController
   end
 
   get "/catches/:id/edit" do
+    #if user is logged in allow for editing
     if Helpers.is_logged_in?(session)
       @catch = Catch.find_by_id(params[:id])
       @bait = Bait.find_by_id(@catch.bait_id)
