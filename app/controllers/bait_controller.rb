@@ -5,11 +5,12 @@ class BaitController < ApplicationController
     if Helpers.is_logged_in?(session)
       @user_bait = []
       @user = Helpers.current_user(session)
-      Bait.all.each do |bait|
-        if bait.user_id.to_i == @user.id
-          @user_bait << bait
-        end
-      end
+      #binding.pry
+      #Bait.all.each do |bait|
+        #if bait.user_id.to_i == @user.id
+        #  @user_bait << bait
+        #end
+    #  end
       erb :"baits/index"
     #if user is not logged in, redirect to login
     else
