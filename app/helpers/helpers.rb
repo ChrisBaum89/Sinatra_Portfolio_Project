@@ -20,9 +20,9 @@ class Helpers
     ((params[:bait_name] != "") && (params[:bait_color] != "") || (params[:bait_id_checked] != nil))
   end
 
+  #simplifies new Bait mass assignment
   def self.new_bait(params, user_id)
-    @bait = Bait.new(name: params["bait_name"], color: params["bait_color"], user_id: user_id.id)
-    @bait.save
+    @bait = Bait.create(name: params["bait_name"], color: params["bait_color"], user_id: user_id.id)
     @bait
   end
 
