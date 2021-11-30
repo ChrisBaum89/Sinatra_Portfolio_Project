@@ -1,22 +1,23 @@
 class Helpers
+
+  #return current user
   def self.current_user(session)
     @user = User.find_by_id(session[:user_id])
   end
 
+  #return true if a session is active
   def self.is_logged_in?(session)
     !!session[:user_id]
   end
 
+  #return true if all Fish model attributes are present in the params
   def self.fish_valid(params)
     (params[:fish_species] != "") && (params[:fish_weight] != "") && (params[:fish_length] != "")
   end
 
+  #return true if all Bait model attributes are present in the params
   def self.bait_valid(params)
     ((params[:bait_name] != "") && (params[:bait_color] != "") || (params[:bait_id_checked] != nil))
-  end
-
-  def self.fish_valid(params)
-    ((params[:fish_species] != "") && (params[:fish_weight] != "") && (params[:fish_length] != ""))
   end
 
   def self.new_bait(params, user_id)
