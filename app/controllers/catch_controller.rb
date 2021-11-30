@@ -16,11 +16,6 @@ class CatchController < ApplicationController
     if Helpers.is_logged_in?(session)
       @user_bait = []
       @user = Helpers.current_user(session)
-      Bait.all.each do |bait|
-        if bait.user_id.to_i == @user.id
-          @user_bait << bait
-        end
-      end
       erb :"catches/new"
     else
       redirect '/login'
