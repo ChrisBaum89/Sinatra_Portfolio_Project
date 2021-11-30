@@ -1,7 +1,7 @@
 class CatchController < ApplicationController
   get "/catches" do
+    #if user is logged route to catches/index
     if Helpers.is_logged_in?(session)
-      @user_catches = []
       @user = Helpers.current_user(session)
       erb :"catches/index"
     else
@@ -9,7 +9,10 @@ class CatchController < ApplicationController
     end
   end
 
+
   get "/catches/new" do
+    #if user is logged in, assign @user_bait to all baits they own to allow for selection,
+    #then allow route to catches/new
     if Helpers.is_logged_in?(session)
       @user_bait = []
       @user = Helpers.current_user(session)
@@ -27,10 +30,13 @@ class CatchController < ApplicationController
   get "/catches/:id" do
     @user = Helpers.current_user(session)
     @catch = Catch.find_by_id(params[:id])
+    #if catch not found, redirect to /catches
     if @catch == nil
       redirect '/catches'
     end
+    #find bait based on bait_id in @catch
     @bait = Bait.find_by_id(@catch.bait_id)
+    #if user is logged in and they are the owner of the catch, then route to catches/show
     if Helpers.is_logged_in?(session) && (@user.id == @bait.user_id)
         erb :"catches/show"
     else
