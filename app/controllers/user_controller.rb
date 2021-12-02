@@ -33,7 +33,7 @@ class UserController < ApplicationController
       #find user by usersname that was entered
       user = User.find_by(username: params[:username])
       #authenticate password
-      if user && user.authenticate(params[:password])
+      if user && (user.authenticate(params[:password]) != false)
         session[:user_id] = user.id
         redirect '/catches'
       else
