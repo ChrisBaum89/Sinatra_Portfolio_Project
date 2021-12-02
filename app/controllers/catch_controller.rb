@@ -45,15 +45,15 @@ class CatchController < ApplicationController
       @catch = Catch.find_by_id(params[:id])
       @bait = Bait.find_by_id(@catch.bait_id)
       @user = Helpers.current_user(session)
-      @user_bait = []
+      #@user_bait = []
 
       #verifies if the user is the owner of the catch
       if @catch && (Helpers.current_user(session).id == @bait.user_id)
-        Bait.all.each do |bait|
-          if bait.user_id.to_i == @user.id
-            @user_bait << bait
-          end
-        end
+        #Bait.all.each do |bait|
+          #if bait.user_id.to_i == @user.id
+            #@user_bait << bait
+          #end
+        #end
         erb :"catches/edit"
       elsif Helpers.is_logged_in?(session)
         redirect '/catches'
