@@ -45,8 +45,6 @@ class CatchController < ApplicationController
       @catch = Catch.find_by_id(params[:id])
       @bait = Bait.find_by_id(@catch.bait_id)
       @user = Helpers.current_user(session)
-      #@user_bait = []
-
       #verifies if the user is the owner of the catch
       if @catch && (Helpers.current_user(session).id == @bait.user_id)
         erb :"catches/edit"
