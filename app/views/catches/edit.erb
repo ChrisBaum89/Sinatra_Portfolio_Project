@@ -17,7 +17,7 @@
 
 
     <h2>Your Existing Baits</h2>
-    <% @user_bait.each do |bait| %>
+    <% @user.baits.each do |bait| %>
       <input type="checkbox" id="bait_<%=bait.id%>" name="bait_id_checked" value="<%=bait.id%>"
       <%if bait.id == @bait.id%>
         checked
